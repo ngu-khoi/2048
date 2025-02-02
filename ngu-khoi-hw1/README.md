@@ -68,11 +68,11 @@ npm test
 ```
 
 The test suite covers:
-- Game initialization
-- Tile movement and combining
-- Score calculation
-- Game over conditions
-- AI move evaluation
+- Game initialization (grid size and empty state)
+- Tile generation (adding new tiles with values 2 or 4)
+- Movement mechanics (left and right tile combining)
+- Move evaluation (scoring potential moves)
+- Game over detection (checking for possible moves)
 
 ## Project Structure
 ```
