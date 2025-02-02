@@ -5,13 +5,13 @@
 
 ## Development Notes
 ### Time Spent
-- Approximately 1 hour total development time
+- Approximately 1.5 hour total development time
 
 ### Key Challenges
 The most significant challenge encountered was related to AI test case implementation:
 - Initial AI-generated test case incorrectly evaluated "optimal moves"
 - Test case assumed a forced move would result in a higher score when no change occurred
-- Resolution required manual evaluation and recreation of a proper test case with correct evaluation criteria
+- After harassing the AI to "just fix it", the only way to fix it was to directly instruct how the actual fix and implementation should be.
 
 ## Game Description
 
