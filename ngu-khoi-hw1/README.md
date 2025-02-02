@@ -1,6 +1,17 @@
 # 2048 Game Implementation
 
-A web-based implementation of the popular 2048 sliding tile puzzle game, featuring both manual play and an auto-play algorithm.
+## Contributors
+- Khoi Nguyen
+
+## Development Notes
+### Time Spent
+- Approximately 1 hour total development time
+
+### Key Challenges
+The most significant challenge encountered was related to AI test case implementation:
+- Initial AI-generated test case incorrectly evaluated "optimal moves"
+- Test case assumed a forced move would result in a higher score when no change occurred
+- Resolution required manual evaluation and recreation of a proper test case with correct evaluation criteria
 
 ## Game Description
 
