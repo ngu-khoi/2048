@@ -6,6 +6,8 @@ class Game2048 {
 		this.score = 0
 		this.gridElement = document.querySelector(".grid")
 		this.scoreElement = document.getElementById("score")
+		this.isAutoPlaying = false
+		this.autoPlayInterval = null
 		this.init()
 	}
 
@@ -24,6 +26,11 @@ class Game2048 {
 
 		// Add keyboard controls
 		document.addEventListener("keydown", (e) => this.handleInput(e))
+
+		// Add auto-play button listener
+		document
+			.getElementById("auto-play")
+			.addEventListener("click", () => this.toggleAutoPlay())
 
 		this.newGame()
 	}
@@ -232,6 +239,85 @@ class Game2048 {
 		}
 
 		return true
+	}
+
+	toggleAutoPlay() {
+		this.isAutoPlaying = !this.isAutoPlaying
+		const autoPlayButton = document.getElementById("auto-play")
+
+		if (this.isAutoPlaying) {
+			autoPlayButton.textContent = "Stop Auto Play"
+			this.autoPlayStep()
+		} else {
+			autoPlayButton.textContent = "Auto Play"
+			if (this.autoPlayInterval) {
+				clearTimeout(this.autoPlayInterval)
+			}
+		}
+	}
+
+	autoPlayStep() {
+		if (!this.isAutoPlaying) return
+
+		const moves = ["ArrowLeft", "ArrowDown", "ArrowRight", "ArrowUp"]
+		const scores = moves.map((move) => this.evaluateMove(move))
+		const bestMove = moves[scores.indexOf(Math.max(...scores))]
+
+		this.handleInput({ key: bestMove })
+
+		this.autoPlayInterval = setTimeout(() => this.autoPlayStep(), 100)
+	}
+
+	evaluateMove(move) {
+		// Create a deep copy of the current grid
+		const tempGrid = JSON.parse(JSON.stringify(this.grid))
+		const tempScore = this.score
+
+		// Simulate the move
+		let moved = false
+		switch (move) {
+			case "ArrowUp":
+				moved = this.moveUp()
+				break
+			case "ArrowDown":
+				moved = this.moveDown()
+				break
+			case "ArrowLeft":
+				moved = this.moveLeft()
+				break
+			case "ArrowRight":
+				moved = this.moveRight()
+				break
+		}
+
+		// Calculate score for this move
+		let score = 0
+
+		// Prefer moves that combine tiles
+		score += this.score - tempScore
+
+		// Prefer moves that keep larger numbers in corners
+		for (let i = 0; i < 4; i++) {
+			for (let j = 0; j < 4; j++) {
+				if (this.grid[i][j] > 0) {
+					// Encourage keeping large numbers in corners
+					if ((i === 0 || i === 3) && (j === 0 || j === 3)) {
+						score += this.grid[i][j] * 2
+					}
+					// Encourage keeping tiles together
+					if (i > 0 && this.grid[i][j] === this.grid[i - 1][j])
+						score += this.grid[i][j]
+					if (j > 0 && this.grid[i][j] === this.grid[i][j - 1])
+						score += this.grid[i][j]
+				}
+			}
+		}
+
+		// Restore the original grid and score
+		this.grid = tempGrid
+		this.score = tempScore
+
+		return moved ? score : -Infinity
 	}
 }
 
