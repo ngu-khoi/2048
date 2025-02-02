@@ -269,9 +269,12 @@ class Game2048 {
 	}
 
 	evaluateMove(move) {
-		// Create a deep copy of the current grid
+		// Create a deep copy of the current grid and score
 		const tempGrid = JSON.parse(JSON.stringify(this.grid))
 		const tempScore = this.score
+
+		// Set the temporary grid for evaluation
+		this.grid = JSON.parse(JSON.stringify(tempGrid))
 
 		// Simulate the move
 		let moved = false
@@ -323,3 +326,7 @@ class Game2048 {
 
 // Initialize the game
 new Game2048()
+
+if (typeof module !== "undefined" && module.exports) {
+	module.exports = Game2048
+}

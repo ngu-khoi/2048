@@ -1,0 +1,17 @@
+{
+  "name": "2048",
+  "version": "1.0.0",
+  "description": "2048 game with AI player",
+  "main": "game.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node server.js"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
