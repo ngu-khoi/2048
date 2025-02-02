@@ -37,17 +37,12 @@ The game includes an auto-play feature that demonstrates an AI algorithm which u
 
 ### Installation and Setup
 
-1. Navigate to the project directory:
-   ```bash
-   cd ngu-khoi-hw1/2048
-   ```
-
-2. Install all dependencies:
+1. Install all dependencies:
    ```bash
    npm i
    ```
 
-3. Install Express server:
+2. Install Express server:
    ```bash
    npm i express
    ```
